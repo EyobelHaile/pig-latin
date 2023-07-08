@@ -1,12 +1,22 @@
-<div class="container">
-    <header class="header">
-      <h1 class="header__title">Pig Latin Translator</h1>
-    </header>
-    <div class="text-input">
-      <textarea class="text-input__input" id="textInput" cols="30" rows="10"></textarea>
-  
-    </div>
-    <div class="text-output" id="textOutput">
-  
-    </div>
-  </div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Pig Latin Translator</title>
+  <script src="js/script.js"></script>
+</head>
+<body>
+  <h1>Pig Latin Translator</h1>
+  <label for="input">Enter a sentence:</label>
+  <input type="text" id="input" />
+  <button onclick="translate()">Translate</button>
+  <p id="output"></p>
+  <script>
+    function translate() {
+      const input = document.getElementById("input").value;
+      const output = document.getElementById("output");
+      const translatedSentence = translateToPigLatin(input);
+      output.textContent = translatedSentence;
+    }
+  </script>
+</body>
+</html>

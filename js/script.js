@@ -1,30 +1,36 @@
-const textInput = document.getElementById("textInput");
-const textOutput = document.getElementById("textOutput");
-const vowels = ["a", "i", "o", "u", "e"];
-const ending = "ay";
-textInput.addEventListener("keyup", (e) => {
-  const input = e.target.value;
-  const output = input
-    .split(" ")
-    .map((word) => {
-      //if first letter is vowel then return with 'ay' ending
-      if (vowels.includes(word[0])) {
-        return word + ending;
+function translatePigLatin(str){
+    str = str.toLowerCase();
+    let initialVowel = str.match(/[aeiou]/);
+    let initialConsonant = str. match(/[bcdfghjklmnpqrstvwxyz]/);
+
+    if (!input || input.length === 1) {
+        return "Input cannot be translated.";
       }
-      //iterate through characters of word until we find a vowel
-      let consonantsPrefix = "";
-      for (let i = 0; i < word.length; i++) {
-        const char = word[i];
-        if (vowels.includes(char)) {
-          break;
+      const words = input.split(" ");
+
+      const translatedWords = words.map((word) => {
+        const lowercaseWord = word.toLowerCase();
+    
+        if (initialVowel(lowercaseWord[0])) {
+          return lowercaseWord + "way";
         }
-        consonantsPrefix += char;
-      }
-      return (
-        word.substring(consonantsPrefix.length) + consonantsPrefix + ending
-      );
-      //Iterate through characters of wor
-    })
-    .join(" ");
-  textOutput.innerText = output;
+
+        if (initialConsonant(lowercaseWord[0])) {
+            if (initialConsonant(lowercaseWord[1])) {
+              return lowercaseWord.slice(2) + lowercaseWord.slice(0, 2) + "ay";
+            }
+            return lowercaseWord.slice(1) + lowercaseWord[0] + "ay";
+        }
+
+        return word;
 });
+
+return translatedWords.join(" ");
+}
+function initialVowel(str) {
+    return /[aeiou]/i.test(str);
+  }
+  
+  function initialConsonant(str) {
+    return /[bcdfghjklmnpqrstvwxyz]/i.test(str);
+  }
